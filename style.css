@@ -8,9 +8,62 @@ body {
 .navbar{
     height :12vh;
     background-color: #333;
+    display: flex;
 }
 .ticket-container{
     min-height: 88vh;
     background-color: #f2f2f2;
-    padding: 2rem;
+    padding: 1rem;
+}
+
+.filter-container, .add-delete-container{
+    margin-top: 2vh;
+    margin-left: 8vw;
+    background-color: #444;
+    height: 8vh;
+  
+}
+
+.filter-container{
+    width: 18vw;
+    display: flex;
+}
+.add-delete-container{
+    width: 9vw;
+}
+
+.filter, .add, .delete{
+    height: 100%;
+}
+.filter{
+    width: 25%;
+}
+.add, .delete{
+    width: 50%;
+}
+
+.pink-color-btn,
+.blue-color-btn,
+.black-color-btn,
+.green-color-btn{
+margin-top: 33%;    
+margin-left: 33%;
+border-radius: 3px;
+display: block;
+width :34%;
+height: 34%;
+}
+
+.pink-color-btn{
+    background-color: pink;
+}
+
+.black-color-btn{
+    background-color:black;
+}
+.blue-color-btn{
+    background-color:blue;
+}
+.green-color-btn{
+    background-color:green;
 }
