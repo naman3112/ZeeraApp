@@ -96,6 +96,7 @@ height: 50%;
     width: 35rem;
     background-color: white;
     display: flex;
+    box-shadow: 0 0 50px 10px;
 }
 .task-to-be-added{
     height: 100%;
