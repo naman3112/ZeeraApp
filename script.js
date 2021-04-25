@@ -36,8 +36,17 @@ function showModal(e) {
       }
     
     })
-    
-    
     modalVisible = true;
+    let modalFilters=document.querySelectorAll(".modal-filter");
+
+    for(let i=0;i<modalFilters.length; i++){
+        modalFilters[i].addEventListener("click",selectPriority);
+    }
   }
+}
+
+function selectPriority(e){
+    let activeFilter=document.querySelector(".modal-filter.active");
+    activeFilter.classList.remove("active");
+    e.currentTarget.classList.add("active");
 }
