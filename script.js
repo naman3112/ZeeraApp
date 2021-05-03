@@ -1,6 +1,7 @@
 let TC = document.querySelector(".ticket-container");
 let allFilters = document.querySelectorAll(".filter");
 let modalVisible = false;
+let selectedPriority="pink";
 for (let i = 0; i < allFilters.length; i++) {
   allFilters[i].addEventListener("click", filterHandler);
   console.log("here");
@@ -28,25 +29,38 @@ function showModal(e) {
     </div>
    `;
     TC.innerHTML = TC.innerHTML + modal;
-    let taskTyper=document.querySelector(".task-to-be-added");
-    taskTyper.addEventListener("click", function(e){
-      if(e.currentTarget.getAttribute("data-type")=="false"){
-        e.currentTarget.innerHTML="";
-        e.currentTarget.setAttribute("data-type","true");
+    let taskTyper = document.querySelector(".task-to-be-added");
+    taskTyper.addEventListener("click", function (e) {
+      if (e.currentTarget.getAttribute("data-type") == "false") {
+        e.currentTarget.innerHTML = "";
+        e.currentTarget.setAttribute("data-type", "true");
       }
-    
-    })
+    });
+    taskTyper.addEventListener("keypress", addTicket);
     modalVisible = true;
-    let modalFilters=document.querySelectorAll(".modal-filter");
+    let modalFilters = document.querySelectorAll(".modal-filter");
 
-    for(let i=0;i<modalFilters.length; i++){
-        modalFilters[i].addEventListener("click",selectPriority);
+    for (let i = 0; i < modalFilters.length; i++) {
+      modalFilters[i].addEventListener("click", selectPriority);
     }
   }
 }
 
-function selectPriority(e){
-    let activeFilter=document.querySelector(".modal-filter.active");
-    activeFilter.classList.remove("active");
-    e.currentTarget.classList.add("active");
+function selectPriority(e) {
+  let activeFilter = document.querySelector(".modal-filter.active");
+  activeFilter.classList.remove("active");
+ selectedPriority=e.currentTarget.classList[0].split("-")[0];
+  e.currentTarget.classList.add("active");
+}
+
+function addTicket(e) {
+  if (e.key == "Enter") {
+    let ticket = ` <div class="ticket">
+    <div class="ticket-color-${selectPriority} ticket-color"></div>
+    <div class="ticket-id">kdkjd</div>
+    <div class="task">
+        ndsandk akdknkaldn kdsaknda
+    </div>
+</div>`;
+  }
 }
