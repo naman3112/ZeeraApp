@@ -36,7 +36,7 @@ function showModal(e) {
         e.currentTarget.setAttribute("data-type", "true");
       }
     });
-    taskTyper.addEventListener("keypress", addTicket);
+    taskTyper.addEventListener("keypress", addTicket.bind(this,taskTyper));
     modalVisible = true;
     let modalFilters = document.querySelectorAll(".modal-filter");
 
@@ -53,14 +53,18 @@ function selectPriority(e) {
   e.currentTarget.classList.add("active");
 }
 
-function addTicket(e) {
+function addTicket(taskTyper,e) {
   if (e.key == "Enter") {
     let ticket = ` <div class="ticket">
-    <div class="ticket-color-${selectPriority} ticket-color"></div>
+    <div class="ticket-color-${selectedPriority} ticket-color"></div>
     <div class="ticket-id">kdkjd</div>
     <div class="task">
-        ndsandk akdknkaldn kdsaknda
+       ${taskTyper.innerText}
     </div>
 </div>`;
-  }
+console.log(ticket);
+document.querySelector(".modal").remove();
+TC.innerHTML=TC.innerHTML+ticket;
+modalVisible=false;
+}
 }
