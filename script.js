@@ -3,6 +3,36 @@ let allFilters = document.querySelectorAll(".filter");
 let modalVisible = false;
 let deleteButton = document.querySelector(".delete");
 let selectedPriority="pink";
+let allTaskData=localStorage.getItem("allTasks");
+
+if(allTaskData!=null){
+  let data=JSON.parse(allTaskData);
+  for(let i=0;i<data.length;i++){
+    let ticket = document.createElement("div");
+   
+    ticket.classList.add("ticket");
+    ticket.innerHTML=  `<div class="ticket-color-${data[i].selectedPriority} ticket-color"></div>
+    <div class="ticket-id"> ${data[i].taskId}</div>
+    <div class="task">
+       ${data[i].task}
+    </div>`
+
+  ticket.addEventListener("click", function(e){
+    if(e.currentTarget.classList.contains("active")){
+      e.currentTarget.classList.remove("active");
+
+    }else{
+      e.currentTarget.classList.add("active");
+    }
+  })
+  TC.appendChild(ticket);
+  }
+}
+
+
+
+
+
 for (let i = 0; i < allFilters.length; i++) {
   allFilters[i].addEventListener("click", filterHandler);
   console.log("here");
@@ -58,15 +88,17 @@ function selectPriority(e) {
 function addTicket(taskTyper,e) {
   if (e.key == "Enter" && e.shiftKey==false && taskTyper.innerText.trim() != "") {
     let ticket = document.createElement("div");
+    let id=uid();
+    let task=taskTyper.innerText;
     ticket.classList.add("ticket");
     ticket.innerHTML=  `<div class="ticket-color-${selectedPriority} ticket-color"></div>
-    <div class="ticket-id"> ${uid()}</div>
+    <div class="ticket-id"> ${id}</div>
     <div class="task">
        ${taskTyper.innerText}
     </div>`
   document.querySelector(".modal").remove();
   modalVisible = false;
- 
+
   ticket.addEventListener("click", function(e){
     if(e.currentTarget.classList.contains("active")){
       e.currentTarget.classList.remove("active");
@@ -76,6 +108,16 @@ function addTicket(taskTyper,e) {
     }
   })
   TC.appendChild(ticket);
+  if(allTaskData==null){
+    let data=[{"taskId" : id, "task" : task, "selectedPriority": selectedPriority}]
+    console.log("data is ",data);
+    localStorage.setItem("allTasks",JSON.stringify(data));
+
+  }else{
+    let data=JSON.parse(allTaskData);
+    data.push({"taskId" : id, "task" : task, "selectedPriority": selectedPriority})
+    localStorage.setItem("allTasks", JSON.stringify(data));
+  }
 console.log(ticket);
 
 
