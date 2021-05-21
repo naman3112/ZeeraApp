@@ -12,10 +12,11 @@ body {
 .ticket-container {
   min-height: 88vh;
   background-color: #f2f2f2;
-  padding: 1rem;
+  padding: 2rem;
   position: relative;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .filter-container,
@@ -144,7 +145,11 @@ body {
   height: 9rem;
   width: 16rem;
   background-color: white;
-  margin: 0 auto 0 auto;
+ 
+}
+.ticket.active{
+  box-shadow: 5px 10px;
+
 }
 
 .ticket-color{
