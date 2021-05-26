@@ -92,7 +92,7 @@ function addTicket(taskTyper,e) {
     let task=taskTyper.innerText;
     ticket.classList.add("ticket");
     ticket.innerHTML=  `<div class="ticket-color-${selectedPriority} ticket-color"></div>
-    <div class="ticket-id"> ${id}</div>
+    <div class="ticket-id">${id}</div>
     <div class="task">
        ${taskTyper.innerText}
     </div>`
@@ -107,6 +107,7 @@ function addTicket(taskTyper,e) {
       e.currentTarget.classList.add("active");
     }
   })
+  let allTaskData=localStorage.getItem("allTasks")
   TC.appendChild(ticket);
   if(allTaskData==null){
     let data=[{"taskId" : id, "task" : task, "selectedPriority": selectedPriority}]
@@ -127,9 +128,16 @@ else if(e.key=="Enter" && e.shiftKey==false ){
   alert("you have not typed anything")
 }
 }
-deleteButton.addEventListener("click", function(e){
-  let selectedTickets=document.querySelectorAll(".ticket.active");
-  for(let i=0;i<selectedTickets.length; i++){
-    selectedTickets[i].remove();
-  }  
-})
+
+deleteButton.addEventListener("click", function (e) {
+  let selectedTickets = document.querySelectorAll(".ticket.active");
+  console.log(selectedTickets);
+  let allTasks = JSON.parse(localStorage.getItem("allTasks"));
+  for (let i = 0; i < selectedTickets.length; i++) {
+      selectedTickets[i].remove();
+      allTasks = allTasks.filter(function (data) {
+          return data.taskId != selectedTickets[i].querySelector(".ticket-id").innerText.trim();
+      })
+  }
+  localStorage.setItem("allTasks", JSON.stringify(allTasks));
+});
