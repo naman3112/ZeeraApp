@@ -137,6 +137,9 @@ body {
 .modal-filter.active {
   border: 5px solid;
 }
+.filter.active{
+  border: 5px solid;
+}
 .task-to-be-added {
   padding: 3rem;
   outline: none;
